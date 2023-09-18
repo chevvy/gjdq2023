@@ -476,7 +476,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5439402153288655510, guid: 1a931b02f9f77da448e7eba8bb4d2b40, type: 3}
       propertyPath: m_Name
-      value: destroyableBlock
+      value: verydestroyableBlock
       objectReference: {fileID: 0}
     - target: {fileID: 5439402153288655511, guid: 1a931b02f9f77da448e7eba8bb4d2b40, type: 3}
       propertyPath: m_IsKinematic
