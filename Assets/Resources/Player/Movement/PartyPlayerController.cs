@@ -59,9 +59,11 @@ public class PartyPlayerController : MonoBehaviour
 
         public void Interact(InputAction.CallbackContext context)
         {
-            if (context.performed)
+            if (!context.performed) return;
+            
+            GameObject newModel = Possesser.PossessNearestItem();
+            if (newModel != null)
             {
-                GameObject newModel = Possesser.PossessNearestItem();
                 ModelManager.SetModel(newModel);
             }
         }

@@ -28,19 +28,7 @@ public class ModelManager : MonoBehaviour
         Vector3 position = gameObject.transform.position;
         Vector3 newVec = new Vector3(position.x, 5f, position.z);
         currentModel = Instantiate(model, newVec, Quaternion.identity, gameObject.transform);
-
-        // StartCoroutine(changeModel(model));
-        
     }
-
-    // IEnumerator changeModel(GameObject model)
-    // {
-    //     defaultModel.SetActive(false);
-    //
-    //     yield return new WaitForSeconds(0.5f);
-    //
-    //     currentModel = Instantiate(model, this.gameObject.transform);
-    // }
 
     public void ResetModel()
     {
