@@ -271,6 +271,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ParentRigidBodyController
       objectReference: {fileID: 0}
+    - target: {fileID: 3544105423264374372, guid: 308400175ba294b6aa04f390c03796d5, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
     - target: {fileID: 4921925113833052722, guid: 308400175ba294b6aa04f390c03796d5, type: 3}
       propertyPath: radius
       value: 16
@@ -430,7 +434,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.16666667
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: c33b7ac07ad604dde8dd4dbc26ea65b6, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 5ca315600afb34571876067946cdef25, type: 2}
   m_BuildHeightMesh: 0
 --- !u!64 &453572688
 MeshCollider:
