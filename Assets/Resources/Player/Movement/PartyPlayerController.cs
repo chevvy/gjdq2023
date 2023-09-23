@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Resources.Player;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
@@ -26,7 +27,8 @@ public class PartyPlayerController : MonoBehaviour
         private Vector3 _velocity;
         private bool isGrounded;
 
-        // public Possesser Possesser;
+        public Possesser Possesser;
+        public ModelManager ModelManager;
         private void Start()
         {
             if (controller == null)
@@ -49,18 +51,19 @@ public class PartyPlayerController : MonoBehaviour
                 throw;
             }
 
-            // if (Possesser == null)
-            // {
-            //     Debug.LogError("Missing possesser script on player");
-            // }
+            if (Possesser == null)
+            {
+                Debug.LogError("Missing possesser script on player");
+            }
         }
 
         public void Interact(InputAction.CallbackContext context)
         {
-            // if (context.performed)
-            // {
-            //     Possesser.PossessNearestItem();
-            // }
+            if (context.performed)
+            {
+                GameObject newModel = Possesser.PossessNearestItem();
+                ModelManager.SetModel(newModel);
+            }
         }
 
         void Update()

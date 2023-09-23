@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using UnityEngine;
 
 namespace Resources.Player
@@ -15,18 +16,23 @@ namespace Resources.Player
     {
         public float radius = 10.0f;
         
-        public void PossessNearestItem()
+        [CanBeNull]
+        public GameObject PossessNearestItem()
         {
-
+            // TODO Change that to a collider in front of player
             Collider[] colliders = Physics.OverlapSphere(this.transform.position, radius);
             foreach (var hit in colliders)
             {
                 if (hit.TryGetComponent(out IPossessable possessable))
                 {
+                    var prefab = possessable.GetPrefab();
                     possessable.PossessItem();
+                    return prefab;
                     Debug.Log("[POSSESSER] possessed item");
                 }
             }
+
+            return null;
         }
     }
 }
