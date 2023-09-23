@@ -33,9 +33,11 @@ public class PartyRigidbodyController : MonoBehaviour
     public void Interact(InputAction.CallbackContext context)
     {
         if (!context.performed) return;
-            
-        GameObject newModel = Possesser.PossessNearestItem();
-        Debug.Log("PLAYER: TRIED POSSESSING", newModel);
+
+        int currentModelId = ModelManager.currentModel.GetInstanceID();
+        Debug.Log("Current model is " + ModelManager.currentModel.name);
+        GameObject newModel = Possesser.PossessNearestItem(currentModelId);
+        Debug.Log("PLAYER: TRIED POSSESSING" + newModel?.name ?? "no model", newModel);
         if (newModel != null)
         {
             ModelManager.SetModel(newModel);
@@ -67,6 +69,15 @@ public class PartyRigidbodyController : MonoBehaviour
     {
         Vector3 dashVelocity = Vector3.Scale(transform.forward, DashDistance * new Vector3((Mathf.Log(1f / (Time.deltaTime * _body.drag + 1)) / -Time.deltaTime), 0, (Mathf.Log(1f / (Time.deltaTime * _body.drag + 1)) / -Time.deltaTime)));
         _body.AddForce(dashVelocity, ForceMode.VelocityChange);
+    }
+
+    public void OnShoot(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            Transform playerTransform = transform;
+            ModelManager.ThrowCurrentModel(playerTransform.forward, playerTransform.rotation);
+        }
     }
 
     void FixedUpdate()

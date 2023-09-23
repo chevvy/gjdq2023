@@ -61,7 +61,8 @@ public class PartyPlayerController : MonoBehaviour
         {
             if (!context.performed) return;
             
-            GameObject newModel = Possesser.PossessNearestItem();
+            int currentModelId = ModelManager.currentModel.GetInstanceID();
+            GameObject newModel = Possesser.PossessNearestItem(currentModelId);
             if (newModel != null)
             {
                 ModelManager.SetModel(newModel);

@@ -26,13 +26,27 @@ public class ModelManager : MonoBehaviour
         }
 
         defaultModel.SetActive(false);
-        Vector3 position = gameObject.transform.position;
+        // Vector3 position = gameObject.transform.position;
         // Vector3 newVec = new Vector3(position.x, 5f, position.z);
         currentModel = Instantiate(model, transform, true);
         if (currentModel.TryGetComponent(out Rigidbody rb))
         {
             rb.isKinematic = true;
         }
+    }
+
+    public void ThrowCurrentModel(Vector3 direction, Quaternion rotation)
+    {
+        if (currentModel == null)
+        {
+            return;
+        }
+        GameObject projectile = Instantiate(currentModel, direction, rotation);
+        Rigidbody rb = projectile.GetComponent<Rigidbody>();
+        rb.isKinematic = false;
+        rb.AddForce(Vector3.forward * 10);
+
+        ResetModel();
     }
 
     [CanBeNull]
