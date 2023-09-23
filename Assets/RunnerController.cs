@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.AI;
@@ -7,14 +5,16 @@ using UnityEngine.AI;
 public class RunnerController : MonoBehaviour
 {
     private NavMeshAgent _agent;
-    private GameOverHandler _gameOverHandler;
-    [SerializeField] private Transform _objective;
+    private GameOverHandler _gameOverHandler; // To notify the agent has won the game
+    [SerializeField] private Transform _objective; // The position the agent is pursuing
 
     void Start()
     {
         _agent = GetComponent<NavMeshAgent>();
+        _agent.speed *= Random.Range(0.25f, 2.0f); // TODO: Remove
         _gameOverHandler = GameObject.Find("GameStateManager").GetComponent<GameOverHandler>();
         
+        Assert.NotNull(_agent);
         Assert.NotNull(_objective);
         Assert.NotNull(_gameOverHandler);
 
@@ -25,8 +25,6 @@ public class RunnerController : MonoBehaviour
     {
         if (IsDestinationReached())
             _gameOverHandler.HandlePlayerReachedObjective(gameObject);
-
-        _agent.acceleration *= Random.Range(0.8f, 1.2f);
     }
 
     bool IsDestinationReached()
@@ -37,6 +35,7 @@ public class RunnerController : MonoBehaviour
 
     void SetDestination()
     {
-        _agent.SetDestination(_objective.position);
+        if (_agent.isActiveAndEnabled)
+            _agent.SetDestination(_objective.position);
     }
 }

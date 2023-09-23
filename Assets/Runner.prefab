@@ -15,9 +15,10 @@ GameObject:
   - component: {fileID: 3184117312945436346}
   - component: {fileID: 6027729879025982785}
   - component: {fileID: 6324311972447934210}
+  - component: {fileID: 7345528916159031467}
   m_Layer: 0
-  m_Name: Player
-  m_TagString: Player
+  m_Name: Runner
+  m_TagString: Runner
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -168,7 +169,21 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &7345528916159031467
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5926161799393312304}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd59bf92bd97b6d4380e90b988258408, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  KnockbackDelay: 0.5
+  KnockbackForce: 0.5
