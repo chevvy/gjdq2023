@@ -552,6 +552,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 144034779}
+  - component: {fileID: 144034780}
   m_Layer: 0
   m_Name: '[EVENTS-MANAGER]'
   m_TagString: Untagged
@@ -575,6 +576,50 @@ Transform:
   - {fileID: 2060807057}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &144034780
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 144034778}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 621567455fd1c4ceb811cc8a00b6a1a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_NotificationBehavior: 1
+  m_MaxPlayerCount: 4
+  m_AllowJoining: 1
+  m_JoinBehavior: 0
+  m_PlayerJoinedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_PlayerLeftEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_JoinAction:
+    m_UseReference: 0
+    m_Action:
+      m_Name: 
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 0}
+  m_PlayerPrefab: {fileID: 402592517}
+  m_SplitScreen: 1
+  m_MaintainAspectRatioInSplitScreen: 1
+  m_FixedNumberOfSplitScreens: -1
+  m_SplitScreenRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
 --- !u!4 &254507448 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 780525856961536066, guid: 878296db87452f84db4dbbe3cccfeb93, type: 3}
@@ -745,6 +790,11 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1 &402592517 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5456543430081107788, guid: 17ea4ddb542a15b418d26931ef55bcd5, type: 3}
+  m_PrefabInstance: {fileID: 5456543429173299681}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &415909776 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5439402153288655515, guid: 1a931b02f9f77da448e7eba8bb4d2b40, type: 3}
