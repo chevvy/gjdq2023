@@ -11,6 +11,6 @@ public class RigidbodyPossessable : MonoBehaviour, IPossessable
 
     public void PossessItem()
     {
-        Debug.Log("POSSESSED");
+        Destroy(gameObject);
     }
 }
