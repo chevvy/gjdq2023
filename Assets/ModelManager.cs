@@ -28,7 +28,7 @@ public class ModelManager : MonoBehaviour
         defaultModel.SetActive(false);
         Vector3 position = gameObject.transform.position;
         // Vector3 newVec = new Vector3(position.x, 5f, position.z);
-        currentModel = Instantiate(model, transform);
+        currentModel = Instantiate(model, transform, true);
         if (currentModel.TryGetComponent(out Rigidbody rb))
         {
             rb.isKinematic = true;
