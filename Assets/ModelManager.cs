@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -26,8 +27,18 @@ public class ModelManager : MonoBehaviour
 
         defaultModel.SetActive(false);
         Vector3 position = gameObject.transform.position;
-        Vector3 newVec = new Vector3(position.x, 5f, position.z);
-        currentModel = Instantiate(model, newVec, Quaternion.identity, gameObject.transform);
+        // Vector3 newVec = new Vector3(position.x, 5f, position.z);
+        currentModel = Instantiate(model, transform.position, Quaternion.identity, transform);
+        if (currentModel.TryGetComponent(out Rigidbody rb))
+        {
+            rb.isKinematic = true;
+        }
+    }
+
+    [CanBeNull]
+    public Rigidbody GetRigidBody()
+    {
+        return currentModel.TryGetComponent(out Rigidbody rb) ? rb : null;
     }
 
     public void ResetModel()
