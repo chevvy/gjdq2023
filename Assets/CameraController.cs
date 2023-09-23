@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using NUnit.Framework;
 using UnityEngine;
 
@@ -9,7 +7,7 @@ public class CameraController : MonoBehaviour
 
     void Start()
     {
-        _player = GameObject.Find("Player 1");
+        _player = GameObject.Find("Runner 1");
 
         Assert.NotNull(_player);
     }

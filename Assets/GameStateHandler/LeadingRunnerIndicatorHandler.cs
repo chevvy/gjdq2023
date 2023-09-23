@@ -4,30 +4,30 @@ using UnityEngine;
 
 public class LeadingRunnerIndicatorHandler : MonoBehaviour
 {
-    private GameObject[] players;
+    private GameObject[] runners;
 
     public void Start()
     {
-        players = GameObject.FindGameObjectsWithTag("Player");
-        Assert.NotNull(players);
-        Assert.IsNotEmpty(players);
+        runners = GameObject.FindGameObjectsWithTag(Tags.Runner);
+        Assert.NotNull(runners);
+        Assert.IsNotEmpty(runners);
     }
 
     public void LateUpdate()
     {
-        players = players.OrderByDescending(x => x.transform.position.x).ToArray();
-        IndicatePlayerAsRunLeader(players[0]);
-        IndicatePlayersAsRunnerUp(players[1..]);
+        runners = runners.OrderByDescending(x => x.transform.position.x).ToArray();
+        IndicateRunnerAsRunLeader(runners[0]);
+        IndicateRunnersAsRunnerUp(runners[1..]);
     }
 
-    private void IndicatePlayerAsRunLeader(GameObject player)
+    private void IndicateRunnerAsRunLeader(GameObject runner)
     {
-        player.GetComponent<MeshRenderer>().material.SetColor("_Color", Color.red);
+        runner.GetComponent<MeshRenderer>().material.SetColor("_Color", Color.red);
     }
 
-    private void IndicatePlayersAsRunnerUp(GameObject[] players)
+    private void IndicateRunnersAsRunnerUp(GameObject[] runners)
     {
-        foreach (var player in players)
+        foreach (var player in runners)
             player.GetComponent<MeshRenderer>().material.SetColor("_Color", Color.white);
     }
 }
