@@ -53,7 +53,8 @@ public class PartyRigidbodyController : MonoBehaviour
         _inputs.z = movementThisFrame.y;
         
         if (_inputs != Vector3.zero)
-            _body.MovePosition(_inputs);
+            _body.AddForce(_inputs);
+            // _body.MovePosition(_inputs);
         
         // if (Input.GetButtonDown("Dash"))
         // {
@@ -62,6 +63,11 @@ public class PartyRigidbodyController : MonoBehaviour
         // }
     }
 
+    public void OnDash(InputAction.CallbackContext context)
+    {
+        Vector3 dashVelocity = Vector3.Scale(transform.forward, DashDistance * new Vector3((Mathf.Log(1f / (Time.deltaTime * _body.drag + 1)) / -Time.deltaTime), 0, (Mathf.Log(1f / (Time.deltaTime * _body.drag + 1)) / -Time.deltaTime)));
+        _body.AddForce(dashVelocity, ForceMode.VelocityChange);
+    }
 
     void FixedUpdate()
     {

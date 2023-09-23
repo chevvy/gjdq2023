@@ -267,6 +267,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2689955678570183513, guid: 308400175ba294b6aa04f390c03796d5, type: 3}
+      propertyPath: m_IsKinematic
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3544105423264374372, guid: 308400175ba294b6aa04f390c03796d5, type: 3}
       propertyPath: m_Name
       value: ParentRigidBodyController
