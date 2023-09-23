@@ -689,7 +689,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1101203026}
   m_Layer: 0
-  m_Name: Objective (P3)
+  m_Name: Objective (R3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
