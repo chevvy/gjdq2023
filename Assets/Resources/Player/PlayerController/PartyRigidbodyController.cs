@@ -16,7 +16,6 @@ public class PartyRigidbodyController : MonoBehaviour
     public Rigidbody _body;
     private Vector3 _inputs = Vector3.zero;
     private bool _isGrounded = true;
-    public Transform _groundChecker;
 
     private Vector3 movementThisFrame = Vector3.zero;
     
@@ -53,9 +52,11 @@ public class PartyRigidbodyController : MonoBehaviour
         _inputs.x = movementThisFrame.x;
         _inputs.y = 0.0f;
         _inputs.z = movementThisFrame.y;
-        
+
         if (_inputs != Vector3.zero)
+        {
             _body.AddForce(_inputs);
+        }
             // _body.MovePosition(_inputs);
         
         // if (Input.GetButtonDown("Dash"))

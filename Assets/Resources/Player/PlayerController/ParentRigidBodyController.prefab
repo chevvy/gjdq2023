@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8569980565556282800}
   - component: {fileID: 2348390087618202345}
   - component: {fileID: 9164159272833186986}
+  - component: {fileID: 6804639679804924047}
   m_Layer: 0
   m_Name: ParentRigidBodyController
   m_TagString: Player
@@ -185,9 +186,24 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   _body: {fileID: 2689955678570183513}
+  _parentRigidBody: {fileID: 2689955678570183513}
   _groundChecker: {fileID: 2665029188428981843}
-  Possesser: {fileID: 0}
+  Possesser: {fileID: 6804639679804924047}
   ModelManager: {fileID: 2163478921849237284}
+--- !u!114 &6804639679804924047
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3544105423264374372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3f9116296ba457fb258a53f5c75fea7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  radius: 10
+  currentPossessedItem: {fileID: 0}
 --- !u!1 &6754399444516241721
 GameObject:
   m_ObjectHideFlags: 0

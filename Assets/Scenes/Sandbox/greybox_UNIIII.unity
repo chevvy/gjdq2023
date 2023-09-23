@@ -279,6 +279,10 @@ PrefabInstance:
       propertyPath: m_ActionEvents.Array.data[2].m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 2677745382255742081, guid: 308400175ba294b6aa04f390c03796d5, type: 3}
+      propertyPath: m_IsKinematic
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2689955678570183513, guid: 308400175ba294b6aa04f390c03796d5, type: 3}
       propertyPath: m_IsKinematic
       value: 1
