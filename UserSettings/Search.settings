@@ -11,7 +11,7 @@ scopes = {
 	"last_search.E8DA15E5" = "timer"
 	"OpenInspectorPreview.E8DA15E5" = "0"
 	"currentGroup.E8DA15E5" = "all"
-	"last_search.310DEAF1" = "destr"
+	"last_search.310DEAF1" = "rigidb"
 	"OpenInspectorPreview.310DEAF1" = "0"
 	"currentGroup.310DEAF1" = "all"
 	"last_search.3BE40471" = ""
@@ -68,7 +68,10 @@ providers = {
 objectSelectors = {
 }
 recentSearches = [
+	"rig"
+	"m"
 	""
+	"poc"
 	"explosionposition:"
 ]
 searchItemFavorites = [
@@ -78,7 +81,7 @@ showSavedSearchPanel = false
 hideTabs = false
 expandedQueries = [
 ]
-queryBuilder = false
+queryBuilder = true
 ignoredProperties = "id;name;classname;imagecontentshash"
 helperWidgetCurrentArea = "p:"
 disabledIndexers = ""
