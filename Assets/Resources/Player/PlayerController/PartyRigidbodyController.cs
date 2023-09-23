@@ -35,6 +35,7 @@ public class PartyRigidbodyController : MonoBehaviour
         if (!context.performed) return;
             
         GameObject newModel = Possesser.PossessNearestItem();
+        Debug.Log("PLAYER: TRIED POSSESSING", newModel);
         if (newModel != null)
         {
             ModelManager.SetModel(newModel);

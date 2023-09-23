@@ -16,6 +16,6 @@ public class GameOverHandler : MonoBehaviour
         Debug.Log($"{player.name} wins");
 
         IsGameWon = true;
-        Time.timeScale = 0;
+        // Time.timeScale = 0;
     }
 }
