@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using Resources.Player;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Composites;
 
 public class PartyRigidbodyController : MonoBehaviour
 {
@@ -17,6 +19,9 @@ public class PartyRigidbodyController : MonoBehaviour
     public Transform _groundChecker;
 
     private Vector3 movementThisFrame = Vector3.zero;
+    
+    public Possesser Possesser;
+    public ModelManager ModelManager;
 
     public void Move(InputAction.CallbackContext context)
     {
@@ -27,7 +32,15 @@ public class PartyRigidbodyController : MonoBehaviour
 
     public void Interact(InputAction.CallbackContext context)
     {
-        Debug.Log("INTERACTED");
+        if (!context.performed) return;
+            
+        GameObject newModel = Possesser.PossessNearestItem();
+        Debug.Log("PLAYER: TRIED POSSESSING", newModel);
+        if (newModel != null)
+        {
+            ModelManager.SetModel(newModel);
+            _body = ModelManager.GetRigidBody();
+        }
     }
 
     void Update()
@@ -36,14 +49,12 @@ public class PartyRigidbodyController : MonoBehaviour
         
         _inputs = Vector3.zero;
         _inputs.x = movementThisFrame.x;
+        _inputs.y = 0.0f;
         _inputs.z = movementThisFrame.y;
+        
         if (_inputs != Vector3.zero)
-            transform.forward = _inputs;
-
-        // if (Input.GetButtonDown("Jump") && _isGrounded)
-        // {
-        //     _body.AddForce(Vector3.up * Mathf.Sqrt(JumpHeight * -2f * Physics.gravity.y), ForceMode.VelocityChange);
-        // }
+            _body.MovePosition(_inputs);
+        
         // if (Input.GetButtonDown("Dash"))
         // {
         //     Vector3 dashVelocity = Vector3.Scale(transform.forward, DashDistance * new Vector3((Mathf.Log(1f / (Time.deltaTime * _body.drag + 1)) / -Time.deltaTime), 0, (Mathf.Log(1f / (Time.deltaTime * _body.drag + 1)) / -Time.deltaTime)));
