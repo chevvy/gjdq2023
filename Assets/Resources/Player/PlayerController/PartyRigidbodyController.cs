@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using JetBrains.Annotations;
 using Resources.Player;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -25,6 +26,10 @@ public class PartyRigidbodyController : MonoBehaviour
     public Transform frontOfCharacter;
 
     public float radius = 10.0f;
+
+    private bool _isObjectSelected = false;
+    // [CanBeNull] private IPossessable _selectedPossessable;
+    [CanBeNull] private GameObject _selectedObject;
     public void Move(InputAction.CallbackContext context)
     {
         Vector2 inputValues = context.ReadValue<Vector2>();
@@ -36,17 +41,39 @@ public class PartyRigidbodyController : MonoBehaviour
     {
         if (!context.performed) return;
 
-        // OldInteractBehavior();
+        // Release object
+        if (_selectedObject != null)
+        {
+            if (_selectedObject.TryGetComponent(out IPossessable poss))
+            {
+                var selectedObjectPrefab = poss.GetPrefab();
+                // var droppedObj = Instantiate(selectedObjectPrefab,transform.position + new Vector3(0,1,0),Quaternion.identity);
+                var droppedObj =      Instantiate (selectedObjectPrefab,
+                    transform.position + transform.forward + Vector3.up*0.14f,
+                    transform.rotation);
+                if (droppedObj.TryGetComponent(out Rigidbody rb))
+                {
+                    rb.isKinematic = false;
+                }
+
+                if (_selectedObject != null)
+                {
+                    Destroy(_selectedObject);
+                }
+            }
+
+            return;
+        }
+        
         Collider[] colliders = Physics.OverlapSphere(transform.position, radius);
         foreach (var hit in colliders)
         {
             if (!hit.TryGetComponent(out IPossessable possessable)) continue;
             var newPrefab = possessable.GetPrefab();
             
-            // var newInstance = Instantiate(newPrefab, frontOfCharacter, false);
-            // var newInstance =Instantiate(newPrefab,transform.position + new Vector3(0,0 +2,0),Quaternion.identity);
             var newInstance = Instantiate(newPrefab, frontOfCharacter.position, frontOfCharacter.rotation,
-                frontOfCharacter); 
+                frontOfCharacter);
+            _selectedObject = newInstance;
             Destroy(hit.gameObject);
             
             if (newInstance.TryGetComponent(out Rigidbody rb))
@@ -65,15 +92,12 @@ public class PartyRigidbodyController : MonoBehaviour
         if (!context.performed) return;
 
         Vector2 viewVector = context.ReadValue<Vector2>();
-        Debug.Log(viewVector);
         selectedObjectMovementThisFrame.x = viewVector.x;
         selectedObjectMovementThisFrame.z = viewVector.y;
     }
 
     void Update()
     {
-        // _isGrounded = Physics.CheckSphere(_groundChecker.position, GroundDistance, Ground, QueryTriggerInteraction.Ignore);
-        
         _inputs = Vector3.zero;
         _inputs.x = movementThisFrame.x;
         _inputs.y = 0.0f;
@@ -83,7 +107,6 @@ public class PartyRigidbodyController : MonoBehaviour
         {
             _body.AddForce(_inputs);
         }
-            // _body.MovePosition(_inputs);
         
         // if (Input.GetButtonDown("Dash"))
         // {

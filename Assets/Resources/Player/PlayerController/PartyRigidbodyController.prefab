@@ -162,7 +162,7 @@ MonoBehaviour:
   _body: {fileID: 5034466312536305062}
   ModelManager: {fileID: 0}
   frontOfCharacter: {fileID: 529396546191143456}
-  radius: 10
+  radius: 4
 --- !u!114 &4497253992459820482
 MonoBehaviour:
   m_ObjectHideFlags: 0
