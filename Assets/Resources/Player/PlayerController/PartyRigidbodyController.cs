@@ -84,6 +84,8 @@ public class PartyRigidbodyController : MonoBehaviour
             {
                 Debug.LogError("NO RB ON NEW COMP");
             }
+
+            return; 
         }
     }
 
@@ -114,6 +116,12 @@ public class PartyRigidbodyController : MonoBehaviour
         //     _body.AddForce(dashVelocity, ForceMode.VelocityChange);
         // }
     }
+    
+    void FixedUpdate()
+    {
+        transform.LookAt(transform.position + selectedObjectMovementThisFrame * Time.fixedDeltaTime);
+        _body.MovePosition(_body.position + _inputs * Speed * Time.fixedDeltaTime);
+    }
 
     public void OnDash(InputAction.CallbackContext context)
     {
@@ -130,9 +138,5 @@ public class PartyRigidbodyController : MonoBehaviour
         }
     }
 
-    void FixedUpdate()
-    {
-        _body.MovePosition(_body.position + _inputs * Speed * Time.fixedDeltaTime);
-        transform.LookAt(transform.position + selectedObjectMovementThisFrame * Time.fixedDeltaTime);
-    }
+
 }
