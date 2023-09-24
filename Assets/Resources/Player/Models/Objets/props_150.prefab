@@ -154,6 +154,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   possessablePrefab: {fileID: 5201721924287805483}
+  _sfxOnDestroy: {fileID: 8300000, guid: ce01c21da65dfdd478492d43ea587b66, type: 3}
 --- !u!65 &393749436826781302
 BoxCollider:
   m_ObjectHideFlags: 0

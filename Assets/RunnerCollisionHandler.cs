@@ -32,7 +32,7 @@ public class RunnerCollisionHandler : MonoBehaviour
             {
                 if (!controller.isObjectSelected) return;
 
-                controller.DropCurrentObject();
+                controller.DropAndDestroy();
             }
         }
         else

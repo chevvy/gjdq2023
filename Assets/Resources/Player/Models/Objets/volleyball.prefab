@@ -120,6 +120,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   possessablePrefab: {fileID: 3590565491754773681}
+  _sfxOnDestroy: {fileID: 8300000, guid: 8590e922f8ca8e54eb65b696d85f627e, type: 3}
 --- !u!54 &-2499721232532072381
 Rigidbody:
   m_ObjectHideFlags: 0
