@@ -16,6 +16,9 @@ public class LeadingRunnerIndicatorHandler : MonoBehaviour
     public void LateUpdate()
     {
         runners = runners.OrderByDescending(x => x.transform.position.x).ToArray();
+        
+        if (runners[0].transform.position.x < -23) return; // before the start line do not handle crowning players
+
         IndicateRunnerAsRunLeader(runners[0]);
         IndicateRunnersAsRunnerUps(runners[1..]);
     }

@@ -18,10 +18,19 @@ public class GameStartHandler : MonoBehaviour
         {
             InstantiateRunner(i, _spawnPoints[i], CharacterPrefabs[i]);
         }
+
+        CrownPreviousGameWinner(GameObject.Find(ScenePersistentData.PreviousGame.Winner));
     }
 
     void InstantiateRunner(int index, GameObject spawnPoint, GameObject prefab)
     {
         Instantiate(prefab, spawnPoint.transform.position, Quaternion.identity);
+    }
+
+    void CrownPreviousGameWinner(GameObject runner)
+    {
+        if (null == runner) return;
+
+        runner.transform.Find("Crown").gameObject.SetActive(true);
     }
 }

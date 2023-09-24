@@ -18,7 +18,8 @@ public class GameOverHandler : MonoBehaviour
         runner.GetComponent<RunnerController>().StartIdleAnimation();
 
         if (!_isEnding)
-        {
+        { 
+            ScenePersistentData.PreviousGame.Winner = runner.name;
             StartCoroutine(BeginEndGameTransition(EndGameDelay));
         }
     }
