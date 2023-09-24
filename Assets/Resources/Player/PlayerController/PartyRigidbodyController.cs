@@ -20,10 +20,9 @@ public class PartyRigidbodyController : MonoBehaviour
     private Vector3 movementThisFrame = Vector3.zero;
     private Vector3 selectedObjectMovementThisFrame = Vector3.zero; 
     
-    public Possesser Possesser;
     public ModelManager ModelManager;
 
-    private Rigidbody selectedObjectRb;
+    public Transform frontOfCharacter;
 
     public float radius = 10.0f;
     public void Move(InputAction.CallbackContext context)
@@ -43,11 +42,16 @@ public class PartyRigidbodyController : MonoBehaviour
         {
             if (!hit.TryGetComponent(out IPossessable possessable)) continue;
             var newPrefab = possessable.GetPrefab();
-            var newInstance = Instantiate(newPrefab, transform, true);
+            
+            // var newInstance = Instantiate(newPrefab, frontOfCharacter, false);
+            // var newInstance =Instantiate(newPrefab,transform.position + new Vector3(0,0 +2,0),Quaternion.identity);
+            var newInstance = Instantiate(newPrefab, frontOfCharacter.position, frontOfCharacter.rotation,
+                frontOfCharacter); 
+            Destroy(hit.gameObject);
+            
             if (newInstance.TryGetComponent(out Rigidbody rb))
             {
                 rb.isKinematic = true;
-                selectedObjectRb = rb;
             }
             else
             {
@@ -65,19 +69,6 @@ public class PartyRigidbodyController : MonoBehaviour
         selectedObjectMovementThisFrame.x = viewVector.x;
         selectedObjectMovementThisFrame.z = viewVector.y;
     }
-
-    // private void OldInteractBehavior()
-    // {
-    //     int currentModelId = ModelManager.currentModel.GetInstanceID();
-    //     Debug.Log("Current model is " + ModelManager.currentModel.name);
-    //     GameObject newModel = Possesser.PossessNearestItem(currentModelId);
-    //     Debug.Log("PLAYER: TRIED POSSESSING" + newModel?.name ?? "no model", newModel);
-    //     if (newModel != null)
-    //     {
-    //         ModelManager.SetModel(newModel);
-    //         _body = ModelManager.GetRigidBody();
-    //     }
-    // }
 
     void Update()
     {
