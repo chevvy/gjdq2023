@@ -1,5 +1,8 @@
+using System;
 using JetBrains.Annotations;
+using Unity.VisualScripting;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace Resources.Player
 {
@@ -18,21 +21,28 @@ namespace Resources.Player
         [CanBeNull] public GameObject currentPossessedItem = null;
         
         [CanBeNull]
-        public GameObject PossessNearestItem()
+        public GameObject PossessNearestItem(int currentObjectId)
         {
             currentPossessedItem = null;
             // TODO Change that to a collider in front of player
-            Collider[] colliders = Physics.OverlapSphere(this.transform.position, radius);
+            Collider[] colliders = Physics.OverlapSphere(transform.position, radius);
             foreach (var hit in colliders)
             {
-                if (hit.TryGetComponent(out IPossessable possessable))
-                {
-                    currentPossessedItem = possessable.GetPrefab();
-                    possessable.PossessItem();
-                }
+                if (!hit.TryGetComponent(out IPossessable possessable)) continue;
+                if (hit.GetInstanceID() == currentObjectId) continue;
+                
+                Debug.Log("[POSSESSER] Got one possessed : " + hit.name);
+                currentPossessedItem = possessable.GetPrefab();
+                possessable.PossessItem();
+                return currentPossessedItem;
             }
 
             return currentPossessedItem;
+        }
+
+        private void OnDrawGizmos()
+        {
+            Gizmos.DrawWireSphere(this.transform.position, radius);
         }
     }
 }

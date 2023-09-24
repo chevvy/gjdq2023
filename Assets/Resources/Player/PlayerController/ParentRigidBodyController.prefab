@@ -11,10 +11,10 @@ GameObject:
   - component: {fileID: 8569980565556282800}
   - component: {fileID: 2348390087618202345}
   - component: {fileID: 9164159272833186986}
-  - component: {fileID: 4921925113833052722}
+  - component: {fileID: 6804639679804924047}
   m_Layer: 0
   m_Name: ParentRigidBodyController
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -82,7 +82,19 @@ MonoBehaviour:
     m_ActionId: eeeb91b8-ed05-448a-ae79-1028ee03ec6b
     m_ActionName: Player/Look[/XboxOneGampadMacOSWireless/rightStick,/Mouse/delta,/Pen/delta]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 9164159272833186986}
+        m_TargetAssemblyTypeName: PartyRigidbodyController, Assembly-CSharp
+        m_MethodName: OnShoot
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: f1f18bb7-5e7c-4cbe-96fb-33230c7c7f45
     m_ActionName: Player/Fire[/XboxOneGampadMacOSWireless/rightTrigger,/Mouse/leftButton]
   - m_PersistentCalls:
@@ -145,6 +157,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: a7a33e10-2816-4909-af3d-ef379db3c1d8
     m_ActionName: UI/TrackedDeviceOrientation
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 8b838a83-a00b-4b2c-9d83-38628091b34d
+    m_ActionName: Player/Dash[/Keyboard/shift,/XboxOneGampadMacOSWireless/buttonEast]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -170,10 +186,11 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   _body: {fileID: 2689955678570183513}
+  _parentRigidBody: {fileID: 2689955678570183513}
   _groundChecker: {fileID: 2665029188428981843}
-  Possesser: {fileID: 4921925113833052722}
+  Possesser: {fileID: 6804639679804924047}
   ModelManager: {fileID: 2163478921849237284}
---- !u!114 &4921925113833052722
+--- !u!114 &6804639679804924047
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -233,7 +250,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   defaultModel: {fileID: 8245030369818427598}
-  currentModel: {fileID: 0}
+  currentModel: {fileID: 8245030369818427598}
 --- !u!1 &8173977661691419336
 GameObject:
   m_ObjectHideFlags: 0
@@ -280,7 +297,7 @@ GameObject:
   - component: {fileID: 2689955678570183513}
   m_Layer: 0
   m_Name: model
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -396,7 +413,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
-  m_IsKinematic: 1
+  m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
