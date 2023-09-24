@@ -17,11 +17,10 @@ public class MenuOverHandler : MonoBehaviour
     void Start()
     {
         Assert.IsNotNull(gameObject.GetComponent<Collider>());
+        Assert.IsNotNull(FadeOutImage);
 
         TimestampObstacleEnteredFinishZone = Time.time;
         MaxAmbientLightIntensity = RenderSettings.ambientIntensity;
-
-        // FadeOutImage = GameObject.Find("FadeOutImage").GetComponent<Image>();
     }
 
     void HandleMenuSceneIsOver()
