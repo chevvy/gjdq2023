@@ -7,7 +7,6 @@ public class RunnerController : MonoBehaviour
     private NavMeshAgent _agent;
     [SerializeField] private Transform _objective;
     [SerializeField] private Animator _animator;
-    
 
     public void StartRunningAnimation()
     {
