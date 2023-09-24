@@ -22,6 +22,7 @@ public class PartyRigidbodyController : MonoBehaviour
     public Possesser Possesser;
     public ModelManager ModelManager;
 
+    public float radius = 10.0f;
     public void Move(InputAction.CallbackContext context)
     {
         Vector2 inputValues = context.ReadValue<Vector2>();
@@ -33,6 +34,26 @@ public class PartyRigidbodyController : MonoBehaviour
     {
         if (!context.performed) return;
 
+        // OldInteractBehavior();
+        Collider[] colliders = Physics.OverlapSphere(transform.position, radius);
+        foreach (var hit in colliders)
+        {
+            if (!hit.TryGetComponent(out IPossessable possessable)) continue;
+            var newPrefab = possessable.GetPrefab();
+            var newInstance = Instantiate(newPrefab, transform, true);
+            if (newInstance.TryGetComponent(out Rigidbody rb))
+            {
+                rb.isKinematic = true;
+            }
+            else
+            {
+                Debug.LogError("NO RB ON NEW COMP");
+            }
+        }
+    }
+
+    private void OldInteractBehavior()
+    {
         int currentModelId = ModelManager.currentModel.GetInstanceID();
         Debug.Log("Current model is " + ModelManager.currentModel.name);
         GameObject newModel = Possesser.PossessNearestItem(currentModelId);
