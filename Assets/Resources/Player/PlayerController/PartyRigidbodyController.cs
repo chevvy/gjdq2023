@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using JetBrains.Annotations;
 using Resources.Player;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Composites;
@@ -41,6 +42,8 @@ public class PartyRigidbodyController : MonoBehaviour
     private bool isGettingAttacked = false;
 
     private bool isMovementActive = true;
+
+    public AudioSource sfxAudioSource;
 
     void Start()
     {
@@ -108,6 +111,18 @@ public class PartyRigidbodyController : MonoBehaviour
         }
     }
 
+    public void DropAndDestroy()
+    {
+        if (_selectedObject == null) return;
+        if (_selectedObject.TryGetComponent(out RigidbodyPossessable possessable))
+        {
+                    
+            sfxAudioSource.clip = possessable.sfxOnDestroy();
+            sfxAudioSource.Play();
+        }
+        DropCurrentObject();
+    }
+
     public void DropCurrentObject()
     {
         if (_selectedObject == null)
@@ -128,6 +143,8 @@ public class PartyRigidbodyController : MonoBehaviour
 
             if (_selectedObject != null)
             {
+
+                
                 Destroy(_selectedObject);
             }
 
