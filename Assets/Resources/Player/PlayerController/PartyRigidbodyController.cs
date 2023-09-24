@@ -29,7 +29,7 @@ public class PartyRigidbodyController : MonoBehaviour
     public float radius = 10.0f;
 
     private bool _isObjectSelected = false;
-    public bool isObjectSelected => _isObjectSelected;
+    public bool isObjectSelected => _selectedObject != null;
 
     public Vector3 attackDirection = Vector3.zero;
 

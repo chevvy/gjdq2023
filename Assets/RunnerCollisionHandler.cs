@@ -27,11 +27,11 @@ public class RunnerCollisionHandler : MonoBehaviour
         if (!CollidedWithObstacle(collision)) return;
 
         if (collision.gameObject.CompareTag("Player"))
-        {
-            
+        { 
             if (collision.gameObject.TryGetComponent(out PartyRigidbodyController controller))
             {
-                controller.DropAndDestroy();
+                controller.DropCurrentObject();
+                controller.GetsAttacked();
             }
         }
         else
@@ -52,13 +52,13 @@ public class RunnerCollisionHandler : MonoBehaviour
         var destination = _agent.destination;
         _runnerAnimator.StartKnockbackAnimation();
         _agent.enabled = false;
-        _rigidBody.isKinematic = false;
+        // _rigidBody.isKinematic = false;
 
         _rigidBody.AddForce(direction * force, ForceMode.Force);
 
         yield return new WaitForSeconds(delay);
 
-        _rigidBody.isKinematic = true;
+        // _rigidBody.isKinematic = true;
         _agent.enabled = true;
         _agent.SetDestination(destination);
         _runnerAnimator.StartRunningAnimation();
