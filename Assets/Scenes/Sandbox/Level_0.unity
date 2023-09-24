@@ -5570,6 +5570,7 @@ MonoBehaviour:
   IsAnObstacleInFinishZone: 0
   TimestampObstacleEnteredFinishZone: 0
   MinimumTriggerTime: 3
+  FadeOutImage: {fileID: 1947588022}
 --- !u!1001 &1645736008
 PrefabInstance:
   m_ObjectHideFlags: 0
