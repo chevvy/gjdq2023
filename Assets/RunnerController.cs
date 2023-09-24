@@ -54,7 +54,6 @@ public class RunnerController : MonoBehaviour
 
     void LateUpdate()
     {
-        transform.LookAt(_objective);
         SetDestination();
     }
 }
