@@ -28,8 +28,6 @@ public class RunnerController : MonoBehaviour
         _agent = GetComponent<NavMeshAgent>();
         _animator = GetComponent<Animator>();
         _objective = GameObject.FindWithTag(Tags.Objective).transform;
-
-        _agent.speed *= Random.Range(0.5f, 1.5f); // TODO: Remove
         
         Assert.NotNull(_agent);
         Assert.NotNull(_objective);
