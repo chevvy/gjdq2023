@@ -20,8 +20,8 @@ public class PartyRigidbodyController : MonoBehaviour
     private bool _isGrounded = true;
 
     private Vector3 movementThisFrame = Vector3.zero;
-    private Vector3 selectedObjectMovementThisFrame = Vector3.zero; 
-    
+    private Vector3 selectedObjectMovementThisFrame = Vector3.zero;
+
     public ModelManager ModelManager;
 
     public Transform frontOfCharacter;
@@ -29,6 +29,7 @@ public class PartyRigidbodyController : MonoBehaviour
     public float radius = 10.0f;
 
     private bool _isObjectSelected = false;
+
     // [CanBeNull] private IPossessable _selectedPossessable;
     [CanBeNull] private GameObject _selectedObject;
 
@@ -62,10 +63,10 @@ public class PartyRigidbodyController : MonoBehaviour
             if (_selectedObject.TryGetComponent(out IPossessable poss))
             {
                 var selectedObjectPrefab = poss.GetPrefab();
-                // var droppedObj = Instantiate(selectedObjectPrefab,transform.position + new Vector3(0,1,0),Quaternion.identity);
-                var droppedObj =      Instantiate (selectedObjectPrefab,
-                    transform.position + transform.forward + Vector3.up*0.14f,
-                    transform.rotation);
+                var transform1 = transform;
+                var droppedObj = Instantiate(selectedObjectPrefab,
+                    transform1.position + transform1.forward + Vector3.up * 0.14f,
+                    transform1.rotation);
                 if (droppedObj.TryGetComponent(out Rigidbody rb))
                 {
                     rb.isKinematic = false;
@@ -76,21 +77,22 @@ public class PartyRigidbodyController : MonoBehaviour
                     Destroy(_selectedObject);
                 }
             }
+
             ToggleRenderer();
             return;
         }
-        
+
         Collider[] colliders = Physics.OverlapSphere(transform.position, radius);
         foreach (var hit in colliders)
         {
             if (!hit.TryGetComponent(out IPossessable possessable)) continue;
             var newPrefab = possessable.GetPrefab();
-            
+
             var newInstance = Instantiate(newPrefab, frontOfCharacter.position, frontOfCharacter.rotation,
                 frontOfCharacter);
             _selectedObject = newInstance;
             Destroy(hit.gameObject);
-            
+
             if (newInstance.TryGetComponent(out Rigidbody rb))
             {
                 rb.isKinematic = true;
@@ -101,7 +103,7 @@ public class PartyRigidbodyController : MonoBehaviour
             }
 
             ToggleRenderer();
-            return; 
+            return;
         }
     }
 
@@ -125,14 +127,14 @@ public class PartyRigidbodyController : MonoBehaviour
         {
             _body.AddForce(_inputs);
         }
-        
+
         // if (Input.GetButtonDown("Dash"))
         // {
         //     Vector3 dashVelocity = Vector3.Scale(transform.forward, DashDistance * new Vector3((Mathf.Log(1f / (Time.deltaTime * _body.drag + 1)) / -Time.deltaTime), 0, (Mathf.Log(1f / (Time.deltaTime * _body.drag + 1)) / -Time.deltaTime)));
         //     _body.AddForce(dashVelocity, ForceMode.VelocityChange);
         // }
     }
-    
+
     void FixedUpdate()
     {
         transform.LookAt(transform.position + selectedObjectMovementThisFrame * Time.fixedDeltaTime);
@@ -141,7 +143,9 @@ public class PartyRigidbodyController : MonoBehaviour
 
     public void OnDash(InputAction.CallbackContext context)
     {
-        Vector3 dashVelocity = Vector3.Scale(transform.forward, DashDistance * new Vector3((Mathf.Log(1f / (Time.deltaTime * _body.drag + 1)) / -Time.deltaTime), 0, (Mathf.Log(1f / (Time.deltaTime * _body.drag + 1)) / -Time.deltaTime)));
+        Vector3 dashVelocity = Vector3.Scale(transform.forward,
+            DashDistance * new Vector3((Mathf.Log(1f / (Time.deltaTime * _body.drag + 1)) / -Time.deltaTime), 0,
+                (Mathf.Log(1f / (Time.deltaTime * _body.drag + 1)) / -Time.deltaTime)));
         _body.AddForce(dashVelocity, ForceMode.VelocityChange);
     }
 
@@ -153,6 +157,4 @@ public class PartyRigidbodyController : MonoBehaviour
             ModelManager.ThrowCurrentModel(playerTransform.forward, playerTransform.rotation);
         }
     }
-
-
 }
