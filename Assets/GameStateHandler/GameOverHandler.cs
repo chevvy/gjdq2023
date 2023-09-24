@@ -1,16 +1,22 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameOverHandler : MonoBehaviour
 {
-    private bool IsGameWon = false;
-    public void HandlePlayerReachedObjective(GameObject player)
+    public void OnTriggerEnter(Collider collider)
     {
-        if (IsGameWon) return;
+        if (collider.CompareTag(Tags.Runner))
+        {
+            HandlePlayerReachedObjective(collider.gameObject);
+        }
+    }
 
-        // TODO: Remove this
-        Debug.Log($"{player.name} wins");
+    public void HandlePlayerReachedObjective(GameObject runner)
+    {
+        Debug.Log($"{runner.name} wins");
 
-        IsGameWon = true;
-        // Time.timeScale = 0;
+        runner.GetComponent<RunnerController>().StartIdleAnimation();
+
+        SceneManager.LoadScene(SceneIndex.EndGameScene);
     }
 }
