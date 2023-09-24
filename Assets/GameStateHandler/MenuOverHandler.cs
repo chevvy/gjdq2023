@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -11,7 +12,7 @@ public class MenuOverHandler : MonoBehaviour
     [SerializeField] private float MinimumTriggerTime = 1.25f;
 
     private float MaxAmbientLightIntensity;
-    private Image FadeOutImage;
+    [SerializeField] private Image FadeOutImage;
 
     void Start()
     {
@@ -20,11 +21,15 @@ public class MenuOverHandler : MonoBehaviour
         TimestampObstacleEnteredFinishZone = Time.time;
         MaxAmbientLightIntensity = RenderSettings.ambientIntensity;
 
-        FadeOutImage = GameObject.Find("FadeOutImage").GetComponent<Image>();
+        // FadeOutImage = GameObject.Find("FadeOutImage").GetComponent<Image>();
     }
 
     void HandleMenuSceneIsOver()
     {
+        GameObject.FindGameObjectsWithTag(Tags.Player).ToList().ForEach( p => {
+            DontDestroyOnLoad(p);
+        });   
+        
         SceneManager.LoadScene(SceneIndex.GameScene);
     }
 

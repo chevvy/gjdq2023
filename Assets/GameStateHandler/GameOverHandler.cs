@@ -1,22 +1,35 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameOverHandler : MonoBehaviour
 {
+    [SerializeField] private float EndGameDelay = 2.0f;
+    private bool _isEnding = false;
+
     public void OnTriggerEnter(Collider collider)
     {
         if (collider.CompareTag(Tags.Runner))
-        {
             HandlePlayerReachedObjective(collider.gameObject);
-        }
     }
 
     public void HandlePlayerReachedObjective(GameObject runner)
     {
-        Debug.Log($"{runner.name} wins");
-
         runner.GetComponent<RunnerController>().StartIdleAnimation();
 
-        SceneManager.LoadScene(SceneIndex.EndGameScene);
+        if (!_isEnding)
+        { 
+            ScenePersistentData.PreviousGame.Winner = runner.name;
+            StartCoroutine(BeginEndGameTransition(EndGameDelay));
+        }
+    }
+
+    IEnumerator BeginEndGameTransition(float t)
+    {
+        _isEnding = true;
+
+        yield return new WaitForSeconds(t);
+
+        SceneManager.LoadScene(SceneIndex.GameScene);
     }
 }
