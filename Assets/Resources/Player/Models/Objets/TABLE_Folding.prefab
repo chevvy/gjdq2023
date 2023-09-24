@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 4433794247578170}
   - component: {fileID: 33217961225268022}
   - component: {fileID: 23761541718629926}
-  - component: {fileID: 1303618183068223417}
-  - component: {fileID: 3178773752392017529}
-  - component: {fileID: 8949609581770465163}
+  - component: {fileID: -3206134861895325125}
+  - component: {fileID: 7795506418875956845}
+  - component: {fileID: -7191067599089583973}
+
   m_Layer: 0
   m_Name: TABLE_Folding
   m_TagString: Obstacle
@@ -31,8 +32,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 2.4859276, y: 0, z: -2.4188657}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1.7, y: 1.7, z: 1.7}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -86,7 +87,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!54 &1303618183068223417
+--- !u!54 &-3206134861895325125
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -113,7 +114,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &3178773752392017529
+--- !u!114 &7795506418875956845
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -126,8 +127,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   possessablePrefab: {fileID: 1243259935979854}
-  _sfxOnDestroy: {fileID: 8300000, guid: a2563d8dc051148d1bd7f245dbca0bc3, type: 3}
---- !u!65 &8949609581770465163
+--- !u!65 &-7191067599089583973
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -146,5 +146,5 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.7936617, y: 0.78887844, z: 1.9818072}
-  m_Center: {x: 0.0007645488, y: 0.3967709, z: -0.0020945072}
+  m_Size: {x: 0.79366165, y: 0.7888784, z: 1.9791468}
+  m_Center: {x: 0.0007645338, y: 0.39677086, z: -0.0007644891}
