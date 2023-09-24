@@ -53,4 +53,10 @@ public class RunnerController : MonoBehaviour
             _agent.SetDestination(destination);
         }
     }
+
+    void LateUpdate()
+    {
+        transform.LookAt(_objective);
+        SetDestination();
+    }
 }
