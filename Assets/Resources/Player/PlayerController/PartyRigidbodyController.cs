@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using JetBrains.Annotations;
 using Resources.Player;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Composites;
@@ -17,7 +18,6 @@ public class PartyRigidbodyController : MonoBehaviour
 
     public Rigidbody _body;
     private Vector3 _inputs = Vector3.zero;
-    private bool _isGrounded = true;
 
     private Vector3 movementThisFrame = Vector3.zero;
     private Vector3 selectedObjectMovementThisFrame = Vector3.zero;
@@ -29,16 +29,23 @@ public class PartyRigidbodyController : MonoBehaviour
     public float radius = 10.0f;
 
     private bool _isObjectSelected = false;
+    public bool isObjectSelected => _isObjectSelected;
+
+    public Vector3 attackDirection = Vector3.zero;
 
     // [CanBeNull] private IPossessable _selectedPossessable;
     [CanBeNull] private GameObject _selectedObject;
 
     private Renderer _playerRenderer;
 
+    private bool isMovementActive = true;
+
+    public AudioSource sfxAudioSource;
 
     void Start()
     {
         _playerRenderer = GetComponent<Renderer>();
+        EnableRenderer();
     }
 
     public void Move(InputAction.CallbackContext context)
@@ -48,9 +55,16 @@ public class PartyRigidbodyController : MonoBehaviour
         movementThisFrame.y = inputValues.y;
     }
 
-    private void ToggleRenderer()
+    private void EnableRenderer()
     {
-        _playerRenderer.enabled = !_playerRenderer.enabled;
+        _playerRenderer.enabled = true;
+        Debug.Log("enabled renderer");
+    }
+
+    private void DisableRenderer()
+    {
+        _playerRenderer.enabled = false;
+        Debug.Log("disabled rendrer");
     }
 
     public void Interact(InputAction.CallbackContext context)
@@ -60,28 +74,15 @@ public class PartyRigidbodyController : MonoBehaviour
         // Release object
         if (_selectedObject != null)
         {
-            if (_selectedObject.TryGetComponent(out IPossessable poss))
-            {
-                var selectedObjectPrefab = poss.GetPrefab();
-                var transform1 = transform;
-                var droppedObj = Instantiate(selectedObjectPrefab,
-                    transform1.position + transform1.forward + Vector3.up * 0.14f,
-                    transform1.rotation);
-                if (droppedObj.TryGetComponent(out Rigidbody rb))
-                {
-                    rb.isKinematic = false;
-                }
-
-                if (_selectedObject != null)
-                {
-                    Destroy(_selectedObject);
-                }
-            }
-
-            ToggleRenderer();
+            DropCurrentObject();
             return;
         }
 
+        PickUpNearestObject();
+    }
+
+    private void PickUpNearestObject()
+    {
         Collider[] colliders = Physics.OverlapSphere(transform.position, radius);
         foreach (var hit in colliders)
         {
@@ -102,9 +103,52 @@ public class PartyRigidbodyController : MonoBehaviour
                 Debug.LogError("NO RB ON NEW COMP");
             }
 
-            ToggleRenderer();
+            DisableRenderer();
             return;
         }
+    }
+
+    public void DropAndDestroy()
+    {
+        if (_selectedObject == null) return;
+        if (_selectedObject.TryGetComponent(out RigidbodyPossessable possessable))
+        {
+                    
+            sfxAudioSource.clip = possessable.sfxOnDestroy();
+            sfxAudioSource.Play();
+        }
+        DropCurrentObject();
+    }
+
+    public void DropCurrentObject()
+    {
+        if (_selectedObject == null)
+        {
+            return;
+        }
+        if (_selectedObject.TryGetComponent(out IPossessable poss))
+        {
+            var selectedObjectPrefab = poss.GetPrefab();
+            var transform1 = transform;
+            var droppedObj = Instantiate(selectedObjectPrefab,
+                transform1.position + transform1.forward + Vector3.up * 0.14f,
+                transform1.rotation);
+            if (droppedObj.TryGetComponent(out Rigidbody rb))
+            {
+                rb.isKinematic = false;
+            }
+
+            if (_selectedObject != null)
+            {
+
+                
+                Destroy(_selectedObject);
+            }
+
+            _selectedObject = null;
+            EnableRenderer();
+        }
+
     }
 
     public void OnLook(InputAction.CallbackContext context)
@@ -137,6 +181,10 @@ public class PartyRigidbodyController : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (!isMovementActive)
+        {
+            return;
+        }
         transform.LookAt(transform.position + selectedObjectMovementThisFrame * Time.fixedDeltaTime);
         _body.MovePosition(_body.position + _inputs * Speed * Time.fixedDeltaTime);
     }
@@ -156,5 +204,15 @@ public class PartyRigidbodyController : MonoBehaviour
             Transform playerTransform = transform;
             ModelManager.ThrowCurrentModel(playerTransform.forward, playerTransform.rotation);
         }
+    }
+
+    IEnumerator ApplyAttackForce()
+    {
+        _body.isKinematic = false;
+        _body.AddForce(Vector3.up * 100);
+        yield return new WaitForSeconds(1);
+
+        _body.isKinematic = true;
+        isMovementActive = true;
     }
 }

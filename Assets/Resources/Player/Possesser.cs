@@ -14,6 +14,7 @@ namespace Resources.Player
         // and spawning the object inside our character model
         public GameObject GetPrefab();
         public void PossessItem();
+        public AudioClip sfxOnDestroy();
     }
     public class Possesser: MonoBehaviour
     {

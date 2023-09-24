@@ -26,7 +26,18 @@ public class RunnerCollisionHandler : MonoBehaviour
     {
         if (!CollidedWithObstacle(collision)) return;
 
-        Destroy(collision.gameObject);
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            
+            if (collision.gameObject.TryGetComponent(out PartyRigidbodyController controller))
+            {
+                controller.DropAndDestroy();
+            }
+        }
+        else
+        {
+            Destroy(collision.gameObject);
+        }
 
         var knockbackDirection = collision.contacts[0].normal;
 
@@ -55,6 +66,6 @@ public class RunnerCollisionHandler : MonoBehaviour
     
     bool CollidedWithObstacle(Collision collision)
     {
-        return collision.gameObject.CompareTag(Tags.Obstacle);
+        return collision.gameObject.CompareTag(Tags.Obstacle) || collision.gameObject.CompareTag("Player");
     }
 }
