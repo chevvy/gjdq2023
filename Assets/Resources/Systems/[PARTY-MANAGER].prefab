@@ -43,6 +43,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4016713631637349126}
   - component: {fileID: 1189079634496354111}
+  - component: {fileID: 7284818265832109693}
   m_Layer: 0
   m_Name: InputSystem
   m_TagString: Untagged
@@ -77,13 +78,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 621567455fd1c4ceb811cc8a00b6a1a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_NotificationBehavior: 0
+  m_NotificationBehavior: 2
   m_MaxPlayerCount: 4
   m_AllowJoining: 1
   m_JoinBehavior: 0
   m_PlayerJoinedEvent:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7284818265832109693}
+        m_TargetAssemblyTypeName: PlayerPrefabManager, Assembly-CSharp
+        m_MethodName: onPlayerJoin
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_PlayerLeftEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -109,6 +122,23 @@ MonoBehaviour:
     y: 0
     width: 1
     height: 1
+--- !u!114 &7284818265832109693
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2623789646818583424}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0184544a2d0b46deb26ec3259450be1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerMaterial:
+  - {fileID: 2100000, guid: 71f5dfa405754ef4483402d62ec44700, type: 2}
+  - {fileID: 2100000, guid: f639aa869ac7fc345b29c79544e65b98, type: 2}
+  - {fileID: 2100000, guid: 8d394a988188c83478c31411e48046af, type: 2}
+  - {fileID: 2100000, guid: ac3d9550bb8f38243a01046e1f465b90, type: 2}
 --- !u!1 &8689431697629254719
 GameObject:
   m_ObjectHideFlags: 0
