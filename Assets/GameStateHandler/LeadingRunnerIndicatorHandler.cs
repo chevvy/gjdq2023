@@ -17,7 +17,7 @@ public class LeadingRunnerIndicatorHandler : MonoBehaviour
     {
         runners = runners.OrderByDescending(x => x.transform.position.x).ToArray();
         IndicateRunnerAsRunLeader(runners[0]);
-        IndicateRunnersAsRunnerUp(runners[1..]);
+        IndicateRunnersAsRunnerUps(runners[1..]);
     }
 
     private void IndicateRunnerAsRunLeader(GameObject runner)
@@ -25,7 +25,7 @@ public class LeadingRunnerIndicatorHandler : MonoBehaviour
         runner.GetComponent<MeshRenderer>().material.SetColor("_Color", Color.red);
     }
 
-    private void IndicateRunnersAsRunnerUp(GameObject[] runners)
+    private void IndicateRunnersAsRunnerUps(GameObject[] runners)
     {
         foreach (var player in runners)
             player.GetComponent<MeshRenderer>().material.SetColor("_Color", Color.white);
