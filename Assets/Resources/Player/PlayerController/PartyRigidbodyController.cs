@@ -18,7 +18,6 @@ public class PartyRigidbodyController : MonoBehaviour
 
     public Rigidbody _body;
     private Vector3 _inputs = Vector3.zero;
-    private bool _isGrounded = true;
 
     private Vector3 movementThisFrame = Vector3.zero;
     private Vector3 selectedObjectMovementThisFrame = Vector3.zero;
@@ -38,8 +37,6 @@ public class PartyRigidbodyController : MonoBehaviour
     [CanBeNull] private GameObject _selectedObject;
 
     private Renderer _playerRenderer;
-
-    private bool isGettingAttacked = false;
 
     private bool isMovementActive = true;
 
@@ -207,14 +204,6 @@ public class PartyRigidbodyController : MonoBehaviour
             Transform playerTransform = transform;
             ModelManager.ThrowCurrentModel(playerTransform.forward, playerTransform.rotation);
         }
-    }
-    
-    public void GetsAttacked() {
-        isGettingAttacked = true;
-        // attackDirection = transform.position - attackPosition;
-
-        // isMovementActive = false;
-        // StartCoroutine(ApplyAttackForce());
     }
 
     IEnumerator ApplyAttackForce()
