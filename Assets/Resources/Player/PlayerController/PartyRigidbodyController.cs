@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using JetBrains.Annotations;
@@ -30,11 +31,25 @@ public class PartyRigidbodyController : MonoBehaviour
     private bool _isObjectSelected = false;
     // [CanBeNull] private IPossessable _selectedPossessable;
     [CanBeNull] private GameObject _selectedObject;
+
+    private Renderer _playerRenderer;
+
+
+    void Start()
+    {
+        _playerRenderer = GetComponent<Renderer>();
+    }
+
     public void Move(InputAction.CallbackContext context)
     {
         Vector2 inputValues = context.ReadValue<Vector2>();
         movementThisFrame.x = inputValues.x;
         movementThisFrame.y = inputValues.y;
+    }
+
+    private void ToggleRenderer()
+    {
+        _playerRenderer.enabled = !_playerRenderer.enabled;
     }
 
     public void Interact(InputAction.CallbackContext context)
@@ -61,7 +76,7 @@ public class PartyRigidbodyController : MonoBehaviour
                     Destroy(_selectedObject);
                 }
             }
-
+            ToggleRenderer();
             return;
         }
         
@@ -85,6 +100,7 @@ public class PartyRigidbodyController : MonoBehaviour
                 Debug.LogError("NO RB ON NEW COMP");
             }
 
+            ToggleRenderer();
             return; 
         }
     }
