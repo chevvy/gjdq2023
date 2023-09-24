@@ -5,37 +5,52 @@ using UnityEngine.AI;
 public class RunnerController : MonoBehaviour
 {
     private NavMeshAgent _agent;
-    private GameOverHandler _gameOverHandler; // To notify the agent has won the game
-    [SerializeField] private Transform _objective; // The position the agent is pursuing
+    [SerializeField] private Transform _objective;
+    [SerializeField] private Animator _animator;
+
+
+    public void StartRunningAnimation()
+    {
+        _animator.SetTrigger("Run");
+    }
+
+    public void StartKnockbackAnimation()
+    {
+        _animator.SetTrigger("Hurt");
+    }
+    
+    public void StartIdleAnimation()
+    {
+        _animator.enabled = false;
+    }
 
     void Start()
     {
         _agent = GetComponent<NavMeshAgent>();
-        _agent.speed *= Random.Range(0.25f, 2.0f); // TODO: Remove
-        _gameOverHandler = GameObject.Find("GameStateManager").GetComponent<GameOverHandler>();
+        _animator = GetComponent<Animator>();
+
+        _agent.speed *= Random.Range(0.5f, 1.5f); // TODO: Remove
         
         Assert.NotNull(_agent);
         Assert.NotNull(_objective);
-        Assert.NotNull(_gameOverHandler);
+        Assert.NotNull(_animator);
 
         SetDestination();
-    }
 
-    void Update()
-    {
-        if (IsDestinationReached())
-            _gameOverHandler.HandlePlayerReachedObjective(gameObject);
-    }
-
-    bool IsDestinationReached()
-    {
-        return transform.position.x == _objective.transform.position.x
-            && transform.position.z == _objective.transform.position.z;
+        StartRunningAnimation();
     }
 
     void SetDestination()
     {
         if (_agent.isActiveAndEnabled)
-            _agent.SetDestination(_objective.position);
+        {
+            var destination = new Vector3(
+                _objective.transform.position.x, 
+                _agent.transform.position.y, 
+                _agent.transform.position.z
+            );
+
+            _agent.SetDestination(destination);
+        }
     }
 }
