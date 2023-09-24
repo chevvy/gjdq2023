@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using JetBrains.Annotations;
 using Resources.Player;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Composites;
@@ -17,7 +18,6 @@ public class PartyRigidbodyController : MonoBehaviour
 
     public Rigidbody _body;
     private Vector3 _inputs = Vector3.zero;
-    private bool _isGrounded = true;
 
     private Vector3 movementThisFrame = Vector3.zero;
     private Vector3 selectedObjectMovementThisFrame = Vector3.zero;
@@ -38,9 +38,9 @@ public class PartyRigidbodyController : MonoBehaviour
 
     private Renderer _playerRenderer;
 
-    private bool isGettingAttacked = false;
-
     private bool isMovementActive = true;
+
+    public AudioSource sfxAudioSource;
 
     void Start()
     {
@@ -108,6 +108,18 @@ public class PartyRigidbodyController : MonoBehaviour
         }
     }
 
+    public void DropAndDestroy()
+    {
+        if (_selectedObject == null) return;
+        if (_selectedObject.TryGetComponent(out RigidbodyPossessable possessable))
+        {
+                    
+            sfxAudioSource.clip = possessable.sfxOnDestroy();
+            sfxAudioSource.Play();
+        }
+        DropCurrentObject();
+    }
+
     public void DropCurrentObject()
     {
         if (_selectedObject == null)
@@ -128,6 +140,8 @@ public class PartyRigidbodyController : MonoBehaviour
 
             if (_selectedObject != null)
             {
+
+                
                 Destroy(_selectedObject);
             }
 
@@ -190,14 +204,6 @@ public class PartyRigidbodyController : MonoBehaviour
             Transform playerTransform = transform;
             ModelManager.ThrowCurrentModel(playerTransform.forward, playerTransform.rotation);
         }
-    }
-    
-    public void GetsAttacked() {
-        isGettingAttacked = true;
-        // attackDirection = transform.position - attackPosition;
-
-        // isMovementActive = false;
-        // StartCoroutine(ApplyAttackForce());
     }
 
     IEnumerator ApplyAttackForce()

@@ -31,8 +31,7 @@ public class RunnerCollisionHandler : MonoBehaviour
             
             if (collision.gameObject.TryGetComponent(out PartyRigidbodyController controller))
             {
-                controller.DropCurrentObject();
-                controller.GetsAttacked();
+                controller.DropAndDestroy();
             }
         }
         else
