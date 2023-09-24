@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -25,6 +26,10 @@ public class MenuOverHandler : MonoBehaviour
 
     void HandleMenuSceneIsOver()
     {
+        GameObject.FindGameObjectsWithTag(Tags.Player).ToList().ForEach( p => {
+            DontDestroyOnLoad(p);
+        });   
+        
         SceneManager.LoadScene(SceneIndex.GameScene);
     }
 

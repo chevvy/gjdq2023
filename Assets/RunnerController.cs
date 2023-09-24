@@ -7,7 +7,7 @@ public class RunnerController : MonoBehaviour
     private NavMeshAgent _agent;
     [SerializeField] private Transform _objective;
     [SerializeField] private Animator _animator;
-
+    
 
     public void StartRunningAnimation()
     {
@@ -28,6 +28,7 @@ public class RunnerController : MonoBehaviour
     {
         _agent = GetComponent<NavMeshAgent>();
         _animator = GetComponent<Animator>();
+        _objective = GameObject.FindWithTag(Tags.Objective).transform;
 
         _agent.speed *= Random.Range(0.5f, 1.5f); // TODO: Remove
         
