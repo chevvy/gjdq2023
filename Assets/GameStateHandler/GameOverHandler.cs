@@ -4,8 +4,8 @@ using UnityEngine.SceneManagement;
 
 public class GameOverHandler : MonoBehaviour
 {
+    [SerializeField] private float EndGameDelay = 2.0f;
     private bool _isEnding = false;
-    private float _endGameDelay = 2.0f;
 
     public void OnTriggerEnter(Collider collider)
     {
@@ -18,7 +18,9 @@ public class GameOverHandler : MonoBehaviour
         runner.GetComponent<RunnerController>().StartIdleAnimation();
 
         if (!_isEnding)
-            StartCoroutine(BeginEndGameTransition(_endGameDelay));
+        {
+            StartCoroutine(BeginEndGameTransition(EndGameDelay));
+        }
     }
 
     IEnumerator BeginEndGameTransition(float t)

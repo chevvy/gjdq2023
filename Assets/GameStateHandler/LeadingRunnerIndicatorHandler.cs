@@ -22,12 +22,14 @@ public class LeadingRunnerIndicatorHandler : MonoBehaviour
 
     private void IndicateRunnerAsRunLeader(GameObject runner)
     {
-        runner.GetComponent<MeshRenderer>().material.SetColor("_Color", Color.red);
+        // runner.GetComponent<MeshRenderer>().material.SetColor("_Color", Color.red);
+        runner.transform.Find("Crown").gameObject.SetActive(true);
     }
 
     private void IndicateRunnersAsRunnerUps(GameObject[] runners)
     {
-        foreach (var player in runners)
-            player.GetComponent<MeshRenderer>().material.SetColor("_Color", Color.white);
+        foreach (var runner in runners)
+            runner.transform.Find("Crown").gameObject.SetActive(false);
+        //     player.GetComponent<MeshRenderer>().material.SetColor("_Color", Color.white);
     }
 }
