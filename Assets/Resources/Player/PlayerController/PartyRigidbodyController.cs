@@ -18,9 +18,12 @@ public class PartyRigidbodyController : MonoBehaviour
     private bool _isGrounded = true;
 
     private Vector3 movementThisFrame = Vector3.zero;
+    private Vector3 selectedObjectMovementThisFrame = Vector3.zero; 
     
     public Possesser Possesser;
     public ModelManager ModelManager;
+
+    private Rigidbody selectedObjectRb;
 
     public float radius = 10.0f;
     public void Move(InputAction.CallbackContext context)
@@ -44,6 +47,7 @@ public class PartyRigidbodyController : MonoBehaviour
             if (newInstance.TryGetComponent(out Rigidbody rb))
             {
                 rb.isKinematic = true;
+                selectedObjectRb = rb;
             }
             else
             {
@@ -52,18 +56,28 @@ public class PartyRigidbodyController : MonoBehaviour
         }
     }
 
-    private void OldInteractBehavior()
+    public void OnLook(InputAction.CallbackContext context)
     {
-        int currentModelId = ModelManager.currentModel.GetInstanceID();
-        Debug.Log("Current model is " + ModelManager.currentModel.name);
-        GameObject newModel = Possesser.PossessNearestItem(currentModelId);
-        Debug.Log("PLAYER: TRIED POSSESSING" + newModel?.name ?? "no model", newModel);
-        if (newModel != null)
-        {
-            ModelManager.SetModel(newModel);
-            _body = ModelManager.GetRigidBody();
-        }
+        if (!context.performed) return;
+
+        Vector2 viewVector = context.ReadValue<Vector2>();
+        Debug.Log(viewVector);
+        selectedObjectMovementThisFrame.x = viewVector.x;
+        selectedObjectMovementThisFrame.z = viewVector.y;
     }
+
+    // private void OldInteractBehavior()
+    // {
+    //     int currentModelId = ModelManager.currentModel.GetInstanceID();
+    //     Debug.Log("Current model is " + ModelManager.currentModel.name);
+    //     GameObject newModel = Possesser.PossessNearestItem(currentModelId);
+    //     Debug.Log("PLAYER: TRIED POSSESSING" + newModel?.name ?? "no model", newModel);
+    //     if (newModel != null)
+    //     {
+    //         ModelManager.SetModel(newModel);
+    //         _body = ModelManager.GetRigidBody();
+    //     }
+    // }
 
     void Update()
     {
@@ -105,5 +119,6 @@ public class PartyRigidbodyController : MonoBehaviour
     void FixedUpdate()
     {
         _body.MovePosition(_body.position + _inputs * Speed * Time.fixedDeltaTime);
+        transform.LookAt(transform.position + selectedObjectMovementThisFrame * Time.fixedDeltaTime);
     }
 }

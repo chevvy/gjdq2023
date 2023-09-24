@@ -259,6 +259,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec2ff6276e1519148ac3ca5292528089, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &402490499 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3195729018027514965, guid: 88c65f169ec92467a80a5c3cf2b055d2, type: 3}
+  m_PrefabInstance: {fileID: 645543448}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &429772991
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -524,7 +529,7 @@ MonoBehaviour:
       m_SingletonActionBindings: []
       m_Flags: 0
     m_Reference: {fileID: 0}
-  m_PlayerPrefab: {fileID: 3544105423264374372, guid: 308400175ba294b6aa04f390c03796d5, type: 3}
+  m_PlayerPrefab: {fileID: 402490499}
   m_SplitScreen: 0
   m_MaintainAspectRatioInSplitScreen: 0
   m_FixedNumberOfSplitScreens: -1
