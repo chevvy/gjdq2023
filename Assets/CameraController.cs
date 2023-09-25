@@ -1,4 +1,3 @@
-using NUnit.Framework;
 using UnityEngine;
 
 public class CameraController : MonoBehaviour
@@ -9,7 +8,7 @@ public class CameraController : MonoBehaviour
     {
         _player = GameObject.Find("Runner 1");
 
-        Assert.NotNull(_player);
+        // Assert.NotNull(_player);
     }
 
     void LateUpdate()

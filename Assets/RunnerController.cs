@@ -1,4 +1,3 @@
-using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -29,9 +28,9 @@ public class RunnerController : MonoBehaviour
         _animator = GetComponent<Animator>();
         _objective = GameObject.FindWithTag(Tags.Objective).transform;
         
-        Assert.NotNull(_agent);
-        Assert.NotNull(_objective);
-        Assert.NotNull(_animator);
+        // Assert.NotNull(_agent);
+        // Assert.NotNull(_objective);
+        // Assert.NotNull(_animator);
 
         SetDestination();
 

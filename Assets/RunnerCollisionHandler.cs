@@ -1,5 +1,4 @@
 using System.Collections;
-using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -17,9 +16,9 @@ public class RunnerCollisionHandler : MonoBehaviour
         _rigidBody = GetComponent<Rigidbody>();
         _runnerAnimator = GetComponent<RunnerAnimator>();
 
-        Assert.NotNull(_agent);
-        Assert.NotNull(_rigidBody);
-        Assert.NotNull(_runnerAnimator);
+        // Assert.NotNull(_agent);
+        // Assert.NotNull(_rigidBody);
+        // Assert.NotNull(_runnerAnimator);
     }
 
     void OnCollisionEnter(Collision collision)
@@ -47,8 +46,8 @@ public class RunnerCollisionHandler : MonoBehaviour
     
     IEnumerator KnockbackAgent(float delay, Vector3 direction, float force)
     {
-        Assert.NotNull(_agent);
-        Assert.NotNull(_rigidBody);
+        // Assert.NotNull(_agent);
+        // Assert.NotNull(_rigidBody);
 
         var destination = _agent.destination;
         _runnerAnimator.StartKnockbackAnimation();

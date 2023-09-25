@@ -44,6 +44,7 @@ public class PartyRigidbodyController : MonoBehaviour
 
     void Start()
     {
+        Debug.Log("THIS SHOWS UP ON BUILD?");
         _playerRenderer = GetComponent<Renderer>();
         EnableRenderer();
     }
@@ -58,13 +59,11 @@ public class PartyRigidbodyController : MonoBehaviour
     private void EnableRenderer()
     {
         _playerRenderer.enabled = true;
-        Debug.Log("enabled renderer");
     }
 
     private void DisableRenderer()
     {
         _playerRenderer.enabled = false;
-        Debug.Log("disabled rendrer");
     }
 
     public void Interact(InputAction.CallbackContext context)

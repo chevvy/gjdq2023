@@ -1,6 +1,5 @@
 using System;
 using System.Linq;
-using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -16,8 +15,8 @@ public class MenuOverHandler : MonoBehaviour
 
     void Start()
     {
-        Assert.IsNotNull(gameObject.GetComponent<Collider>());
-        Assert.IsNotNull(FadeOutImage);
+        // Assert.IsNotNull(gameObject.GetComponent<Collider>());
+        // Assert.IsNotNull(FadeOutImage);
 
         TimestampObstacleEnteredFinishZone = Time.time;
         MaxAmbientLightIntensity = RenderSettings.ambientIntensity;
