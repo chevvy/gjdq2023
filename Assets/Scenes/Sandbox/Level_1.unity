@@ -341,7 +341,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!82 &51455404
 AudioSource:
   m_ObjectHideFlags: 0
@@ -12934,6 +12934,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7284818265832109693, guid: c55f47c8321974dcc854ab4f49ac82fa, type: 3}
+      propertyPath: _playerMaterial.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: e0b72520a844a634d9ee06aee1395baa, type: 2}
+    - target: {fileID: 7284818265832109693, guid: c55f47c8321974dcc854ab4f49ac82fa, type: 3}
+      propertyPath: _playerMaterial.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 61721d07ae57d9440b4d0e10bbaad853, type: 2}
+    - target: {fileID: 7284818265832109693, guid: c55f47c8321974dcc854ab4f49ac82fa, type: 3}
+      propertyPath: _playerMaterial.Array.data[2]
+      value: 
+      objectReference: {fileID: 2100000, guid: 8fef7850e270c864cb39723c130dfaa2, type: 2}
+    - target: {fileID: 7284818265832109693, guid: c55f47c8321974dcc854ab4f49ac82fa, type: 3}
+      propertyPath: _playerMaterial.Array.data[3]
+      value: 
+      objectReference: {fileID: 2100000, guid: 617ca876bb7acdc4f8a3d742477bd8b4, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
