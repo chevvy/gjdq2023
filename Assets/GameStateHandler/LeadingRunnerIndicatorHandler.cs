@@ -8,8 +8,11 @@ public class LeadingRunnerIndicatorHandler : MonoBehaviour
     public void Start()
     {
         runners = GameObject.FindGameObjectsWithTag(Tags.Runner);
-        // Assert.NotNull(runners);
-        // Assert.IsNotEmpty(runners);
+        if (runners is null)
+            Debug.LogError($"[{GetType()}] Missing runners reference");
+
+        if (runners.Length == 0)
+            Debug.LogError($"[{GetType()}] No runners found");
     }
 
     public void LateUpdate()

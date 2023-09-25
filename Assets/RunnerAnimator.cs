@@ -24,6 +24,7 @@ public class RunnerAnimator : MonoBehaviour
     {
         _animator = GetComponent<Animator>();
 
-        // Assert.NotNull(_animator);
+        if(_animator is null)
+            Debug.LogError($"[{GetType()}] Missing animator reference");
     }
 }

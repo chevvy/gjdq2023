@@ -15,8 +15,10 @@ public class MenuOverHandler : MonoBehaviour
 
     void Start()
     {
-        // Assert.IsNotNull(gameObject.GetComponent<Collider>());
-        // Assert.IsNotNull(FadeOutImage);
+        if (!TryGetComponent(out Collider coll))
+            Debug.LogError($"[{GetType()}] Missing collider reference");
+        if (FadeOutImage is null)
+            Debug.LogError($"[{GetType()}] Missing FadeOutImage reference");
 
         TimestampObstacleEnteredFinishZone = Time.time;
         MaxAmbientLightIntensity = RenderSettings.ambientIntensity;
