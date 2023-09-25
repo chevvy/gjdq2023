@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: -3206134861895325125}
   - component: {fileID: 7795506418875956845}
   - component: {fileID: -7191067599089583973}
-
   m_Layer: 0
   m_Name: TABLE_Folding
   m_TagString: Obstacle
@@ -127,6 +126,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   possessablePrefab: {fileID: 1243259935979854}
+  _sfxOnDestroy: {fileID: 8300000, guid: 9497c8d4e8d0afe4dbb37802d6874cb5, type: 3}
 --- !u!65 &-7191067599089583973
 BoxCollider:
   m_ObjectHideFlags: 0

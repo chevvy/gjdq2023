@@ -8,10 +8,10 @@ onBoardingDoNotAskAgain = true
 showPackageIndexes = false
 showStatusBar = false
 scopes = {
-	"last_search.E8DA15E5" = "timer"
+	"last_search.E8DA15E5" = "level_0"
 	"OpenInspectorPreview.E8DA15E5" = "0"
 	"currentGroup.E8DA15E5" = "all"
-	"last_search.310DEAF1" = "folding"
+	"last_search.310DEAF1" = "Level_"
 	"OpenInspectorPreview.310DEAF1" = "0"
 	"currentGroup.310DEAF1" = "all"
 	"last_search.3BE40471" = ""
@@ -68,11 +68,14 @@ providers = {
 objectSelectors = {
 }
 recentSearches = [
+	""
+	"character"
+	"L"
+	"level"
 	"inp"
 	"g"
 	"rig"
 	"m"
-	""
 	"poc"
 	"explosionposition:"
 ]
