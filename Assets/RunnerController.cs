@@ -1,4 +1,3 @@
-using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -28,10 +27,13 @@ public class RunnerController : MonoBehaviour
         _agent = GetComponent<NavMeshAgent>();
         _animator = GetComponent<Animator>();
         _objective = GameObject.FindWithTag(Tags.Objective).transform;
-        
-        Assert.NotNull(_agent);
-        Assert.NotNull(_objective);
-        Assert.NotNull(_animator);
+
+        if (_agent is null)
+            Debug.LogError($"[{GetType()}] Missing agent reference");
+        if(_objective is null)
+            Debug.LogError($"[{GetType()}] Missing objective reference");
+        if(_animator is null)
+            Debug.LogError($"[{GetType()}] Missing animator reference");
 
         SetDestination();
 

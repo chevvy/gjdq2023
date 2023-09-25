@@ -1,5 +1,4 @@
 using System.Collections;
-using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -17,9 +16,12 @@ public class RunnerCollisionHandler : MonoBehaviour
         _rigidBody = GetComponent<Rigidbody>();
         _runnerAnimator = GetComponent<RunnerAnimator>();
 
-        Assert.NotNull(_agent);
-        Assert.NotNull(_rigidBody);
-        Assert.NotNull(_runnerAnimator);
+        if(_agent is null)
+            Debug.LogError($"[{GetType()}] Missing agent reference");
+        if(_rigidBody is null)
+            Debug.LogError($"[{GetType()}] Missing rigidbody reference");
+        if(_runnerAnimator)
+            Debug.LogError($"[{GetType()}] Missing RunnerAnimator reference");
     }
 
     void OnCollisionEnter(Collision collision)
@@ -47,8 +49,11 @@ public class RunnerCollisionHandler : MonoBehaviour
     
     IEnumerator KnockbackAgent(float delay, Vector3 direction, float force)
     {
-        Assert.NotNull(_agent);
-        Assert.NotNull(_rigidBody);
+        
+        if(_agent is null)
+            Debug.LogError($"[{GetType()}] Missing agent reference");
+        if(_rigidBody is null)
+            Debug.LogError($"[{GetType()}] Missing rigidbody reference");
 
         var destination = _agent.destination;
         _runnerAnimator.StartKnockbackAnimation();

@@ -1,4 +1,3 @@
-using NUnit.Framework;
 using UnityEngine;
 
 public class CameraController : MonoBehaviour
@@ -9,7 +8,8 @@ public class CameraController : MonoBehaviour
     {
         _player = GameObject.Find("Runner 1");
 
-        Assert.NotNull(_player);
+        if(_player is null)
+            Debug.LogError($"[{GetType()}] couldnt find player 1");
     }
 
     void LateUpdate()
