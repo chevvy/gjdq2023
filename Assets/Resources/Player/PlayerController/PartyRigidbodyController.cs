@@ -91,7 +91,9 @@ public class PartyRigidbodyController : MonoBehaviour
             var newInstance = Instantiate(newPrefab, frontOfCharacter.position, frontOfCharacter.rotation,
                 frontOfCharacter);
             _selectedObject = newInstance;
-            Destroy(hit.gameObject);
+            if(!hit.gameObject.CompareTag("Player")) {
+                Destroy(hit.gameObject);
+            }
 
             if (newInstance.TryGetComponent(out Rigidbody rb))
             {

@@ -6,7 +6,7 @@ public class RunnerCollisionHandler : MonoBehaviour
 {
     private NavMeshAgent _agent;
     private Rigidbody _rigidBody;
-    private RunnerAnimator _runnerAnimator;
+    public RunnerAnimator _runnerAnimator;
     [SerializeField] private float KnockbackDelay = 0.5f;
     [SerializeField] private float KnockbackForce = 10.0f;
 
@@ -24,26 +24,32 @@ public class RunnerCollisionHandler : MonoBehaviour
             Debug.LogError($"[{GetType()}] Missing RunnerAnimator reference");
     }
 
-    void OnCollisionEnter(Collision collision)
+    // void OnCollisionEnter(Collision collision)
+    // {
+    //     if (!CollidedWithObstacle(collision)) return;
+    //
+    //     if (collision.gameObject.CompareTag("Player"))
+    //     { 
+    //         if (collision.gameObject.TryGetComponent(out PartyRigidbodyController controller))
+    //         {
+    //             if (!controller.isObjectSelected) return;
+    //
+    //             controller.DropAndDestroy();
+    //         }
+    //     }
+    //     else
+    //     {
+    //         Destroy(collision.gameObject);
+    //     }
+    //
+    //     var knockbackDirection = collision.contacts[0].normal;
+    //
+    //     StartCoroutine(KnockbackAgent(KnockbackDelay, knockbackDirection, KnockbackForce));
+    // }
+
+    public void StartKnockBack(Vector3 knockbackDirection)
     {
-        if (!CollidedWithObstacle(collision)) return;
-
-        if (collision.gameObject.CompareTag("Player"))
-        { 
-            if (collision.gameObject.TryGetComponent(out PartyRigidbodyController controller))
-            {
-                if (!controller.isObjectSelected) return;
-
-                controller.DropAndDestroy();
-            }
-        }
-        else
-        {
-            Destroy(collision.gameObject);
-        }
-
-        var knockbackDirection = collision.contacts[0].normal;
-
+        
         StartCoroutine(KnockbackAgent(KnockbackDelay, knockbackDirection, KnockbackForce));
     }
     
@@ -70,8 +76,8 @@ public class RunnerCollisionHandler : MonoBehaviour
         _runnerAnimator.StartRunningAnimation();
     }
     
-    bool CollidedWithObstacle(Collision collision)
-    {
-        return collision.gameObject.CompareTag(Tags.Obstacle) || collision.gameObject.CompareTag("Player");
-    }
+    // bool CollidedWithObstacle(Collision collision)
+    // {
+    //     return collision.gameObject.CompareTag(Tags.Obstacle) || collision.gameObject.CompareTag("Player");
+    // }
 }

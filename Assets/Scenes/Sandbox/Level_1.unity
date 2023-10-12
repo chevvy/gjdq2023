@@ -13392,10 +13392,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: '[PARTY-MANAGER]'
       objectReference: {fileID: 0}
-    - target: {fileID: 1189079634496354111, guid: c55f47c8321974dcc854ab4f49ac82fa, type: 3}
-      propertyPath: m_PlayerPrefab
-      value: 
-      objectReference: {fileID: 8216768880299144513, guid: 36ec89c0f10eb4fef8339b208bc12eaa, type: 3}
     - target: {fileID: 1605030517073624620, guid: c55f47c8321974dcc854ab4f49ac82fa, type: 3}
       propertyPath: orthographic size
       value: 10
