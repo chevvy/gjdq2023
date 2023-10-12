@@ -44,7 +44,6 @@ public class PartyRigidbodyController : MonoBehaviour
 
     void Start()
     {
-        Debug.Log("THIS SHOWS UP ON BUILD?");
         _playerRenderer = GetComponent<Renderer>();
         EnableRenderer();
     }
@@ -141,8 +140,6 @@ public class PartyRigidbodyController : MonoBehaviour
 
             if (_selectedObject != null)
             {
-
-                
                 Destroy(_selectedObject);
             }
 

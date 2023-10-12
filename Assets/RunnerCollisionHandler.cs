@@ -20,7 +20,7 @@ public class RunnerCollisionHandler : MonoBehaviour
             Debug.LogError($"[{GetType()}] Missing agent reference");
         if(_rigidBody is null)
             Debug.LogError($"[{GetType()}] Missing rigidbody reference");
-        if(_runnerAnimator)
+        if(_runnerAnimator is null)
             Debug.LogError($"[{GetType()}] Missing RunnerAnimator reference");
     }
 
@@ -49,7 +49,6 @@ public class RunnerCollisionHandler : MonoBehaviour
 
     public void StartKnockBack(Vector3 knockbackDirection)
     {
-        
         StartCoroutine(KnockbackAgent(KnockbackDelay, knockbackDirection, KnockbackForce));
     }
     
