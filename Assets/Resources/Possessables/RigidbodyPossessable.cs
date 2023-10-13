@@ -17,8 +17,11 @@ public class RigidbodyPossessable : MonoBehaviour, IPossessable
         Destroy(gameObject);
     }
 
-    public AudioClip sfxOnDestroy()
+    public void PlayImpactSound(AudioSource audioSource)
     {
-        return _sfxOnDestroy;
+        if (audioSource == null) return;
+
+        audioSource.clip = _sfxOnDestroy;
+        audioSource.Play();
     }
 }

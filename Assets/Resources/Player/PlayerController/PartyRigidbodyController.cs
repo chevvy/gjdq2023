@@ -3,10 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using JetBrains.Annotations;
 using Resources.Player;
+using Resources.Possessables;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Composites;
+using UnityEngine.Serialization;
 
 public class PartyRigidbodyController : MonoBehaviour
 {
@@ -22,7 +24,7 @@ public class PartyRigidbodyController : MonoBehaviour
     private Vector3 movementThisFrame = Vector3.zero;
     private Vector3 selectedObjectMovementThisFrame = Vector3.zero;
 
-    public ModelManager ModelManager;
+    [FormerlySerializedAs("ModelManager")] public PossessableManager possessableManager;
 
     public Transform frontOfCharacter;
 
@@ -111,11 +113,11 @@ public class PartyRigidbodyController : MonoBehaviour
     public void DropAndDestroy()
     {
         if (_selectedObject == null) return;
+
+        // TODO optimize by setting selected object as an IPossesable
         if (_selectedObject.TryGetComponent(out RigidbodyPossessable possessable))
         {
-                    
-            sfxAudioSource.clip = possessable.sfxOnDestroy();
-            sfxAudioSource.Play();
+            possessable.PlayImpactSound(sfxAudioSource);
         }
         DropCurrentObject();
     }
@@ -200,7 +202,7 @@ public class PartyRigidbodyController : MonoBehaviour
         if (context.performed)
         {
             Transform playerTransform = transform;
-            ModelManager.ThrowCurrentModel(playerTransform.forward, playerTransform.rotation);
+            possessableManager.ThrowCurrentModel(playerTransform.forward, playerTransform.rotation);
         }
     }
 

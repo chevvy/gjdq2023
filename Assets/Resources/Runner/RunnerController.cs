@@ -6,15 +6,17 @@ public class RunnerController : MonoBehaviour
     private NavMeshAgent _agent;
     [SerializeField] private Transform _objective;
     [SerializeField] private Animator _animator;
+    private static readonly int Run = Animator.StringToHash("Run");
+    private static readonly int Hurt = Animator.StringToHash("Hurt");
 
     public void StartRunningAnimation()
     {
-        _animator.SetTrigger("Run");
+        _animator.SetTrigger(Run);
     }
 
     public void StartKnockbackAnimation()
     {
-        _animator.SetTrigger("Hurt");
+        _animator.SetTrigger(Hurt);
     }
     
     public void StartIdleAnimation()

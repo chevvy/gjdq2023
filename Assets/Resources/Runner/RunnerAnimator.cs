@@ -4,15 +4,17 @@ using UnityEngine.AI;
 public class RunnerAnimator : MonoBehaviour
 {
     private Animator _animator;
+    private static readonly int Hurt = Animator.StringToHash("Hurt");
+    private static readonly int Run = Animator.StringToHash("Run");
 
     public void StartRunningAnimation()
     {
-        _animator.SetTrigger("Run");
+        _animator.SetTrigger(Run);
     }
 
     public void StartKnockbackAnimation()
     {
-        _animator.SetTrigger("Hurt");
+        _animator.SetTrigger(Hurt);
     }
     
     public void StartIdleAnimation()
@@ -20,7 +22,7 @@ public class RunnerAnimator : MonoBehaviour
         _animator.enabled = false;
     }
 
-    void Start()
+    private void Start()
     {
         _animator = GetComponent<Animator>();
 

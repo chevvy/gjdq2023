@@ -2,13 +2,13 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Resources.Player;
+using Resources.Possessables;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
 
 public class PartyPlayerController : MonoBehaviour
 {
-    // Start is called before the first frame update
         public CharacterController controller;
         public float speed = 12f;
         public float gravity = -9.81f;
@@ -28,7 +28,7 @@ public class PartyPlayerController : MonoBehaviour
         private bool isGrounded;
 
         public Possesser Possesser;
-        public ModelManager ModelManager;
+        [FormerlySerializedAs("ModelManager")] public PossessableManager possessableManager;
         private void Start()
         {
             if (controller == null)
@@ -61,11 +61,11 @@ public class PartyPlayerController : MonoBehaviour
         {
             if (!context.performed) return;
             
-            int currentModelId = ModelManager.currentModel.GetInstanceID();
+            int currentModelId = possessableManager.currentModel.GetInstanceID();
             GameObject newModel = Possesser.PossessNearestItem(currentModelId);
             if (newModel != null)
             {
-                ModelManager.SetModel(newModel);
+                possessableManager.SetModel(newModel);
             }
         }
 
