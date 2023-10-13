@@ -44,7 +44,6 @@ public class PartyRigidbodyController : MonoBehaviour
 
     void Start()
     {
-        Debug.Log("THIS SHOWS UP ON BUILD?");
         _playerRenderer = GetComponent<Renderer>();
         EnableRenderer();
     }
@@ -91,7 +90,9 @@ public class PartyRigidbodyController : MonoBehaviour
             var newInstance = Instantiate(newPrefab, frontOfCharacter.position, frontOfCharacter.rotation,
                 frontOfCharacter);
             _selectedObject = newInstance;
-            Destroy(hit.gameObject);
+            if(!hit.gameObject.CompareTag("Player")) {
+                Destroy(hit.gameObject);
+            }
 
             if (newInstance.TryGetComponent(out Rigidbody rb))
             {
@@ -139,8 +140,6 @@ public class PartyRigidbodyController : MonoBehaviour
 
             if (_selectedObject != null)
             {
-
-                
                 Destroy(_selectedObject);
             }
 

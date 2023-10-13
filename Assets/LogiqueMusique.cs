@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,7 +8,6 @@ public class LogiqueMusique : MonoBehaviour
     public AudioClip Intro;
     public AudioClip Loop;
     private AudioSource[] Musique;
- 
 
     // Start is called before the first frame update
     void Start()
@@ -27,11 +27,5 @@ public class LogiqueMusique : MonoBehaviour
         Musique[1].loop = true;
         Musique[1].PlayDelayed(Musique[0].clip.length);
 
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
